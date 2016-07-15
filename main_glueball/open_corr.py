@@ -78,11 +78,49 @@ for ttt in tvalues:
    eigstore[0:maxeig,0:2,tp]  = basic_vary_analysis(ttt,noconfig,verb,maxeig,glueball_corr)
    tp += 1
    
-##basic_vary_analysis(3,noconfig,verb,maxeig,glueball_corr)
-##basic_vary_analysis(4,noconfig,verb,maxeig,glueball_corr)
-##basic_vary_analysis(5,noconfig,verb,maxeig,glueball_corr)
-##basic_vary_analysis(6,noconfig,verb,maxeig,glueball_corr)
-##basic_vary_analysis(7,noconfig,verb,maxeig,glueball_corr) 
+
+
+print "Summary"
+for ieig in range(0,maxeig):
+   print "Eigenvalue = " , ieig
+   for tp in range(0,tval):
+      print tvalues[tp] , eigstore[ieig,0,tp] , eigstore[ieig,1,tp] 
+
+print "Starting to create the plot"
+
+
+##import pylab
+##from matplotlib.pyplot import *
+
+
+##pylab.errorbar(x=tvalues, y=eigstore[ieig,0,0:tval],xerr=eigstore[ieig,1,0:tval],fmt='bs' ,linewidth=2  )
+##pylab.savefig('EigMass.pdf',format="pdf")
+##pylab.show()
+
+
+##
+##  https://docs.python.org/3/library/pickle.html#data-stream-format
+##
+import pickle
+
+
+
+with open('data/eigstore.pickle', 'wb') as f:
+# Pickle the 'data' dictionary using the highest protocol available.
+   pickle.dump(eigstore, f, pickle.HIGHEST_PROTOCOL)
+       
+
+with open('data/tvalues.pickle', 'wb') as f:
+# Pickle the 'data' dictionary using the highest protocol available.
+   pickle.dump(tvalues, f, pickle.HIGHEST_PROTOCOL)
+       
+
+
+   
+##with open('data.pickle', 'rb') as f:
+# The protocol version used is detected automatically, so we do not
+# have to specify it.
+##data = pickle.load(f)
 
 
 print "End of python analysis"
