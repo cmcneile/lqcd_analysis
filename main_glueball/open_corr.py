@@ -68,12 +68,21 @@ for ifile in inames:
 ##plotcorr_glueball(cname, 18,4, noconfig,glueball_corr) 
 
 
-basic_vary_analysis(2,noconfig,verb, glueball_corr)
-basic_vary_analysis(3,noconfig,verb, glueball_corr)
-basic_vary_analysis(4,noconfig,verb, glueball_corr)
-basic_vary_analysis(5,noconfig,verb, glueball_corr)
-basic_vary_analysis(6,noconfig,verb, glueball_corr)
-basic_vary_analysis(7,noconfig,verb, glueball_corr) 
+maxeig = 3
+tvalues = [  2 , 3 , 4, 5 , 6 , 7  ] 
+tval = len(tvalues) 
+eigstore = zeros( (maxeig,2,tval ))
+
+tp = 0 
+for ttt in tvalues: 
+   eigstore[0:maxeig,0:2,tp]  = basic_vary_analysis(ttt,noconfig,verb,maxeig,glueball_corr)
+   tp += 1
+   
+##basic_vary_analysis(3,noconfig,verb,maxeig,glueball_corr)
+##basic_vary_analysis(4,noconfig,verb,maxeig,glueball_corr)
+##basic_vary_analysis(5,noconfig,verb,maxeig,glueball_corr)
+##basic_vary_analysis(6,noconfig,verb,maxeig,glueball_corr)
+##basic_vary_analysis(7,noconfig,verb,maxeig,glueball_corr) 
 
 
 print "End of python analysis"

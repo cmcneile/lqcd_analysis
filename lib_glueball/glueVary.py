@@ -17,6 +17,8 @@ from jackknife import *
 
 def compute_full_vary(tvary,noconfig,glueball_corr) :
 
+
+
   print "Eigenvalue analysis t = " , tvary
 
   dim = nblock * numop
@@ -96,11 +98,16 @@ def compute_jack_vary(jomit, tvary,noconfig,glueball_corr) :
 ##
 ##
 
-def basic_vary_analysis(tvary,noconfig,verb, glueball_corr) :
+def basic_vary_analysis(tvary,noconfig,verb,  maxeig , glueball_corr) :
 
   print "Eigenvalue analysis t = " , tvary
-  maxeig = 5
+##  maxeig = 5
+##the second index is for mean and error  
+  eig_ans       = zeros( (maxeig,2 ))
+
   jeig = zeros( (maxeig,noconfig) )
+
+
   
   dim = nblock * numop
   print "Dimension of vary matrix = " , dim
@@ -132,7 +139,9 @@ def basic_vary_analysis(tvary,noconfig,verb, glueball_corr) :
       teig[iconfig] = jeig[kk,iconfig]
     jerr = jackknife(teig,noconfig)    
     print "EIG[",tvary,",",kk ,"]= " , w[kk] , jerr 
+    eig_ans[kk,0] =  w[kk]
+    eig_ans[kk,1] =  jerr
     
   print "End of jackknife analysis"
 
-  
+  return eig_ans 
