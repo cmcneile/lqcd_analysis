@@ -9,7 +9,7 @@ from param import *
 from glueUtil import *
 from glueAnal import *
 from glueVary import *
-
+from glueUtil_hdf5 import *
 
 bwidth = 4 
 
@@ -41,60 +41,35 @@ inames = load_names_text( input )
 noconfig = len(inames)
 print "Number ofconfigs = " , noconfig
 
-
+import h5py
 
 print "Average over block widths of " , bwidth
 
 bconfig = noconfig / bwidth
-glueball_corr       = zeros( (bconfig, nblock,nblock,Ntmax,numop,numop,numbin ))
+
 
 for iconf in range(0,bconfig):
+   glueball_corr       = zeros( (bconfig, nblock,nblock,Ntmax,numop,numop,numbin ))
    for ib in range(0,bwidth):
      ii = ib + iconf*bwidth 
      ifile = inames[ii] 
      if verb :
         print "Reading from " ,  ifile
 
-glueball_corr   /= bwidth
+
+   glueball_corr   /= bwidth
+
+
+   tmp = inames[ii].split('/')
+   itmp = len(tmp)  - 1 
+
+   otag = "binned/" +  tmp[itmp]
+   print "DEBUG " , otag
+   ofile = otag + "bwidth_" + str(bwidth)  +  "_block_no_" + str(iconf)
+   if verb :
+     print "Writing binned data to  " ,  ofile
+   write_gball_corr(ofile,verb,glueball_corr) 
+   
 
 sys.exit(0) 
-
-##  ----------------------------------------
-ii = 0
-for ifile in inames:
-   if verb :
-      print "Reading from " ,  ifile
-
-   tmp = ifile.split('/', 2)
-   cname = tmp[2]
-   
-#   print "Reading the header "
-   fff =  read_header(ifile,verb) 
-#   sys.exit(0)
-#   verb = False
-
-#   print "Reading the data"
-   read_body(fff,verb,ii, glueball_corr)
-#   print "Data has been read"
-   ii = ii + 1 
-
-
-
-##plotcorr_glueball(0,0, noconfig,glueball_corr) 
-##plotcorr_glueball(10,4, noconfig,glueball_corr)
-##plotcorr_glueball(15,4, noconfig,glueball_corr)
-##print cname
-##plotcorr_glueball(cname, 18,4, noconfig,glueball_corr) 
-
-
-basic_vary_analysis(2,noconfig,verb, glueball_corr)
-basic_vary_analysis(3,noconfig,verb, glueball_corr)
-basic_vary_analysis(4,noconfig,verb, glueball_corr)
-basic_vary_analysis(5,noconfig,verb, glueball_corr)
-basic_vary_analysis(6,noconfig,verb, glueball_corr)
-basic_vary_analysis(7,noconfig,verb, glueball_corr) 
-
-
-print "End of python analysis"
-sys.exit(0)
 
