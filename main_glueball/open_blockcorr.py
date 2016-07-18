@@ -26,6 +26,7 @@ verb = True
 print "Number of blocks = " , nblock
 print "Number of timeslices  = " , Ntmax
 print "Number of operators " , numop
+print "Width of bin = " , bwidth
 
 
 ##  ----------------------------------------
@@ -35,7 +36,7 @@ def create_outfile(ii, inames) :
    itmp = len(tmp)  - 1 
 
    otag = "binned/" +  tmp[itmp]
-   print "DEBUG " , otag
+#   print "DEBUG " , otag
    return otag
 
 
@@ -62,8 +63,8 @@ for iconf in range(0,bconfig):
      ifile = inames[ii] 
      if verb :
         print "Reading from " ,  ifile
-     fff =  read_header(ifile,verb) 
-     read_body_Ainc(fff,verb,glueball_corr)
+     fff =  read_header(ifile,False) 
+     read_body_Ainc(fff,False,glueball_corr)
 
    glueball_corr   /= bwidth
 
