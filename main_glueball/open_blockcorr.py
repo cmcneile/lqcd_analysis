@@ -30,7 +30,14 @@ print "Number of operators " , numop
 
 ##  ----------------------------------------
 
-##sys.path.append('/home/cmcneile/Gcorr_case3_new_rago/lib_potential')
+def create_outfile(ii, inames) :
+   tmp = inames[ii].split('/')
+   itmp = len(tmp)  - 1 
+
+   otag = "binned/" +  tmp[itmp]
+   print "DEBUG " , otag
+   return otag
+
 
 from corr_util  import *
 
@@ -49,22 +56,18 @@ bconfig = noconfig / bwidth
 
 
 for iconf in range(0,bconfig):
-   glueball_corr       = zeros( (bconfig, nblock,nblock,Ntmax,numop,numop,numbin ))
+   glueball_corr       = zeros( (nblock,nblock,Ntmax,numop,numop,numbin ))
    for ib in range(0,bwidth):
      ii = ib + iconf*bwidth 
      ifile = inames[ii] 
      if verb :
         print "Reading from " ,  ifile
-
+     fff =  read_header(ifile,verb) 
+     read_body_Ainc(fff,verb,glueball_corr)
 
    glueball_corr   /= bwidth
 
-
-   tmp = inames[ii].split('/')
-   itmp = len(tmp)  - 1 
-
-   otag = "binned/" +  tmp[itmp]
-   print "DEBUG " , otag
+   otag = create_outfile(ii, inames) 
    ofile = otag + "bwidth_" + str(bwidth)  +  "_block_no_" + str(iconf)
    if verb :
      print "Writing binned data to  " ,  ofile

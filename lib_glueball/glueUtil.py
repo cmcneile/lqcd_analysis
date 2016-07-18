@@ -193,6 +193,46 @@ def read_body_inc(f,verbose,jj,glueball_corr) :
 
 
 
+
+
+
+##
+##
+##
+
+def read_body_Ainc(f,verbose,glueball_corr) :
+    """
+    Read the body of a glueball correlator file.
+    Add the read in correlator to the existing correlator.
+    This is used for blocking.
+    """
+    for ibin in range(0, numbin):
+        for iopA in range(0,numop) :
+            for iblockA in range(0, nblock) :
+                for iopB in range(0,numop) : 
+                    for iblockB in range(0, nblock) :
+                        for t in range(0, Ntmax) :
+                            
+                            try:
+                                bbb = f.read(8)
+                            except IOError as e:
+                                print "I/O error({0}): {1}".format(e.errno, e.strerror)
+                            except:
+                                print "Unexpected error:", sys.exc_info()[0]
+                                raise
+
+                            vvv = struct.unpack('d',bbb)
+                            if verbose :
+                                print t, vvv[0]
+            
+                            glueball_corr[iblockA,iblockB,t, iopA,iopB, ibin] = vvv[0]
+
+
+
+    f.close()
+
+
+
 ##
 ##
 ##

@@ -21,3 +21,19 @@ def write_gball_corr(fname,verbose,glueball_corr) :
 
     if verbose :
        print "Data written to " , fname , " in hdf5 format"
+
+
+
+def read_gball_corr(fname,verbose) :
+    """
+    Read the glueball correlator file in hdf5 format.
+    """
+
+    with h5py.File(fname, 'r') as hf:
+     	 glueball_corr = hf.get('gballcorr')
+
+
+    if verbose :
+       print "Data read from " , fname , " in hdf5 format"
+
+    return glueball_corr
