@@ -56,6 +56,10 @@ for ifile in inames:
 
 #   print "Reading the data"
    read_body(fff,verb,ii, glueball_corr)
+   print_glueball_A(ii, glueball_corr) 
+   if ii == 3 :
+     sys.exit(0)
+
 #   print "Data has been read"
    ii = ii + 1 
 

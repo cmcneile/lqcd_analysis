@@ -237,8 +237,13 @@ def read_body_Ainc(f,verbose,glueball_corr) :
 ##
 ##
 
-def print_glueball(glueball_corr) :
-
+def print_glueball(ii, glueball_corr) :
+    """
+    Print the glueball correlators to the screen.
+    The correlator data structure includes all configurations
+    """
+    print "******************************"
+    print "Correlator " , ii
     for iblock in range(0, numbin):
         for iopA in range(0,numop) :
             for iblockA in range(0, nblock) :
@@ -246,7 +251,30 @@ def print_glueball(glueball_corr) :
                     for iblockB in range(0, nblock) :
                         for t in range(0, Ntmax) :
                             
-                            print glueball_corr[iblockA,iblockB,t, iopA,iopB, iblock]
+                            print glueball_corr[ii,iblockA,iblockB,t, iopA,iopB, iblock]
+
+
+
+
+##
+##
+##
+
+def print_glueball_A(ii, glueball_corr) :
+    """
+    Print the glueball correlators to the screen.
+    The correlator data structure includes only ONE  configuration.
+    """
+    print "******************************"
+    print "Correlator " , ii
+    for iblock in range(0, numbin):
+        for iopA in range(0,numop) :
+            for iblockA in range(0, nblock) :
+                for iopB in range(0,numop) : 
+                    for iblockB in range(0, nblock) :
+                        for t in range(0, Ntmax) :
+                            
+                            print glueball_corr[ii,iblockA,iblockB,t, iopA,iopB, iblock]
 
 
 
