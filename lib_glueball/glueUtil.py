@@ -146,6 +146,8 @@ def read_body(f,verbose,jj,glueball_corr) :
                             vvv = struct.unpack('d',bbb)
                             if verbose :
                                 print t, vvv[0]
+
+#                            print "DEBUG", t, vvv[0]
             
                             glueball_corr[jj, iblockA,iblockB,t, iopA,iopB, ibin] = vvv[0]
 
@@ -275,7 +277,6 @@ def print_glueball_A(ii, glueball_corr) :
                         for t in range(0, Ntmax) :
                             
                             print glueball_corr[ii,iblockA,iblockB,t, iopA,iopB, iblock]
-
 
 
 

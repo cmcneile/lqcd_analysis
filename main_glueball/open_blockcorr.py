@@ -11,7 +11,7 @@ from glueAnal import *
 from glueVary import *
 from glueUtil_hdf5 import *
 
-bwidth = 4 
+bwidth = 2
 
 print "I am loading the data"
 
@@ -31,13 +31,6 @@ print "Width of bin = " , bwidth
 
 ##  ----------------------------------------
 
-def create_outfile(ii, inames) :
-   tmp = inames[ii].split('/')
-   itmp = len(tmp)  - 1 
-
-   otag = "binned/" +  tmp[itmp]
-#   print "DEBUG " , otag
-   return otag
 
 
 from corr_util  import *
@@ -54,6 +47,14 @@ import h5py
 print "Average over block widths of " , bwidth
 
 bconfig = noconfig / bwidth
+
+def create_outfile(ii, inames) :
+   tmp = inames[ii].split('/')
+   itmp = len(tmp)  - 1 
+
+   otag = "binned/" +  tmp[itmp]
+#   print "DEBUG " , otag
+   return otag
 
 
 for iconf in range(0,bconfig):
