@@ -11,7 +11,7 @@ from glueAnal import *
 from glueVary import *
 from glueUtil_hdf5 import *
 
-bwidth = 1
+bwidth = 2
 
 print "I am loading the data"
 
@@ -36,8 +36,9 @@ print "Width of bin = " , bwidth
 from corr_util  import *
 
 input = "input.txt" 
-inames = load_names_text( input )
+inamesTmp = load_names_text( input )
 
+inames = sort_inputfles(inamesTmp)
 
 noconfig = len(inames)
 print "Number ofconfigs = " , noconfig

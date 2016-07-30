@@ -282,7 +282,7 @@ def sort_inputfles(ifiles) :
     ptOne = one[ii:iip]
     ptTwo = two[ii:iip]
     if ptOne  != ptTwo :
-      print "Mismach at " , ii
+#      print "Mismach at " , ii
       ifront = ii 
       break
 
@@ -340,31 +340,27 @@ def sort_inputfles(ifiles) :
 
 
   for ff in ifiles:
-    print ff
+#    print ff
 
     ffr = ff.replace(tagend, "")
     fffr = ffr.replace(tagStart, "")
    
-    sweepstore.append(fffr)
+    sweepstore.append(int(fffr))
 
-    print fffr 
-    print " "
+#    print fffr 
+#    print " "
    
-
-
-  print "Sweep numbers "
-
-  for ff in sweepstore :
-    print ff
-
-
-
   inorder = sorted(sweepstore)
+
+  print "Sorted Sweep numbers "
+
+  for ff in inorder :
+    print ff
 
   ans = [] 
   for ff in inorder :
 
-    fff = tagStart + ff + tagend
+    fff = tagStart + str(ff) + tagend
     ans.append(fff)
 
   return ans

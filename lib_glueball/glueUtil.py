@@ -227,7 +227,8 @@ def read_body_Ainc(f,verbose,glueball_corr) :
                             if verbose :
                                 print t, vvv[0]
             
-                            glueball_corr[iblockA,iblockB,t, iopA,iopB, ibin] = vvv[0]
+                            glueball_corr[iblockA,iblockB,t, iopA,iopB, ibin] = \
+                            glueball_corr[iblockA,iblockB,t, iopA,iopB, ibin] + vvv[0]
 
 
 

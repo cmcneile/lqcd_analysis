@@ -63,7 +63,9 @@ from corr_util  import *
 input = "input_bin.txt" 
 ioformat = 1
 
-inames = load_names_text( input )
+inamesTmp = load_names_text( input )
+
+inames = sort_inputfles(inamesTmp)
 
 
 Param['inputfile'] = input
@@ -80,8 +82,8 @@ glueball_corr       = zeros( (noconfig, nblock,nblock,Ntmax,numop,numop,numbin )
 ##  ----------------------------------------
 ii = 0
 for ifile in inames:
-   if verb :
-      print "Reading from " ,  ifile
+#   if verb :
+   print "Reading from " ,  ifile
 
    if not os.path.isfile(ifile) :
       print "Error " , ifile , " not found"
