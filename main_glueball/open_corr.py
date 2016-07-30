@@ -30,6 +30,18 @@ Param['Number_of_blocks'] = nblock
 Param['Number_of_timeslices'] = Ntmax
 Param['Number_of_operators'] = numop
 
+
+import time
+ 
+now = time.strftime("%c")
+## date and time representation
+ddd = time.strftime("%c")
+print "Current date & time " , ddd
+
+Param['date'] = ddd
+
+
+
 def create_tag(ifile) :
    tmp = ifile.split('/')
    itmp = len(tmp)  - 1 
@@ -54,9 +66,14 @@ ioformat = 1
 inames = load_names_text( input )
 
 
+Param['inputfile'] = input
+Param['ioformat'] = ioformat
+
+
 noconfig = len(inames)
 print "Number ofconfigs = " , noconfig
 
+Param['Number_of_configs'] = noconfig
 
 glueball_corr       = zeros( (noconfig, nblock,nblock,Ntmax,numop,numop,numbin ))
 
@@ -84,8 +101,6 @@ for ifile in inames:
 
    print_glueball_A(ii, glueball_corr) 
 
-   if ii == 3 :
-     sys.exit(0)
 
 #   print "Data has been read"
    ii = ii + 1 

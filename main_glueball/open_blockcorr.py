@@ -11,7 +11,7 @@ from glueAnal import *
 from glueVary import *
 from glueUtil_hdf5 import *
 
-bwidth = 2
+bwidth = 1
 
 print "I am loading the data"
 

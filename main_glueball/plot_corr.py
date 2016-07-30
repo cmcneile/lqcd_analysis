@@ -9,10 +9,20 @@ import pickle
 
 print "Starting to read the file "
 
-with open('data/eigstore.pickle', 'rb') as f:
+with open('data/param.pickle', 'rb') as f:
 # The protocol version used is detected automatically, so we do not
 # have to specify it.
+  Param = pickle.load(f)
+
+print "Parameters of the correlators"
+for kkk in Param.keys()  :
+   print kkk , " ="  , Param[kkk]
+
+##sys.exit()
+
+with open('data/eigstore.pickle', 'rb') as f:
   eigstore = pickle.load(f)
+
 
 with open('data/tvalues.pickle', 'rb') as f:
      tvalues = pickle.load(f)

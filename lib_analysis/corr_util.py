@@ -262,3 +262,109 @@ def av_corr_mass(corr,nosample,t,jsample,imass):
   return total
 
 
+def sort_inputfles(ifiles) :
+  """
+   Sort the file names in terms of the sweep numbe.
+  """
+
+  one = ifiles[0] 
+  two  =  ifiles[1]
+
+  print "One = " , one
+  print "Two = " , two
+
+  ll = len(one) 
+
+  print "Length of one = " , ll
+
+  for ii in range(0,ll):
+    iip = ii + 1
+    ptOne = one[ii:iip]
+    ptTwo = two[ii:iip]
+    if ptOne  != ptTwo :
+      print "Mismach at " , ii
+      ifront = ii 
+      break
+
+##
+##  now remove any digits
+##
+
+  while ifront > 1 :
+    ii = ifront - 1
+    tmp = one[ii:ifront]
+    if not tmp.isdigit() :
+      break
+    ifront = ifront - 1
+
+  tagStart = one[0:ifront]
+
+  print "Starting tag "  , tagStart
+
+
+  lone = len(one) 
+  llone = lone 
+
+  ltwo = len(two) 
+
+  while lone > ifront and ltwo > ifront  :
+    ptOne = one[(lone-1):lone]
+    ptTwo = two[(ltwo-1):ltwo]
+
+    if ptOne != ptTwo :
+      tagend = one[lone:llone]
+      break
+
+    lone = lone - 1 
+    ltwo = ltwo - 1 
+
+##
+##  now remove the digits
+##
+
+  ii = 0 
+  while ii < llone :
+    iip = ii + 1 
+    ptOne = tagend[ii:iip]
+    if not ptOne.isdigit() :
+      tmp = tagend[ii:len(tagend)]
+      tagend = tmp 
+      break
+    ii = ii + 1
+
+
+  print "Tag end = " , tagend
+
+
+  sweepstore = [] 
+
+
+  for ff in ifiles:
+    print ff
+
+    ffr = ff.replace(tagend, "")
+    fffr = ffr.replace(tagStart, "")
+   
+    sweepstore.append(fffr)
+
+    print fffr 
+    print " "
+   
+
+
+  print "Sweep numbers "
+
+  for ff in sweepstore :
+    print ff
+
+
+
+  inorder = sorted(sweepstore)
+
+  ans = [] 
+  for ff in inorder :
+
+    fff = tagStart + ff + tagend
+    ans.append(fff)
+
+  return ans
