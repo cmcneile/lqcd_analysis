@@ -364,3 +364,16 @@ def sort_inputfles(ifiles) :
     ans.append(fff)
 
   return ans
+
+
+def get_files_from_dir(mydir):
+
+  from os import listdir
+  from os.path import isfile, join
+  onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+
+  for ff in onlyfiles :
+     print "DEBUG "  , ff
+
+  return onlyfiles
+

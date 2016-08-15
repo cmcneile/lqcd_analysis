@@ -57,13 +57,16 @@ def create_tag(ifile) :
 
 from corr_util  import *
 
-#input = "input.txt" 
-#ioformat = 0
+input = "input.txt" 
+ioformat = 0
 
-input = "input_bin.txt" 
-ioformat = 1
+#input = "input_bin.txt" 
+#ioformat = 1
 
 inamesTmp = load_names_text( input )
+
+## I am working on the segment below
+##inamesTmp = get_files_from_dir("binned")
 
 inames = sort_inputfles(inamesTmp)
 
