@@ -39,38 +39,38 @@ def read_header(inn,verbose) :
             if verbose :
                 ccc = count + 1
                 if count < lnames:
-                    print "Header " , ccc , names[count] , vvv , iii
+                    print ("Header " , ccc , names[count] , vvv , iii)
                 else:
-                    print "Header " , ccc , "CORR" , vvv , iii
+                    print ("Header " , ccc , "CORR" , vvv , iii)
 
             if count  == 9 and iii != numop :
-                print "Mismatch of number of operators"
+                print ("Mismatch of number of operators")
                 raise SomeError("An error occurred")
 
             if count  == 12 and iii != nblock  :
-                print "Mismatch of number of blocks"
+                print ("Mismatch of number of blocks")
                 raise SomeError("An error occurred")
 
             if count  == 13 and iii != Ntmax  :
-                print "Mismatch of number of blocks"
+                print print ("Mismatch of number of blocks")
                 raise SomeError("An error occurred")
 
             count = count + 1 
 
 
     except IOError as e:
-        print "I/O error({0}): {1}".format(e.errno, e.strerror)
+        print ("I/O error({0}): {1}".format(e.errno, e.strerror))
         raise
     except ValueError:
-        print "Could not convert data to an integer."
+        print ("Could not convert data to an integer.")
         raise
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print ("Unexpected error:", sys.exc_info()[0])
         raise
 
 #    print "Final entry in header " , iii
     if iii !=  magicnumber  :
-      print "ERROR Does not match magic number " , magicnumber
+      print ("ERROR Does not match magic number " , magicnumber)
       sys.exit(1) 
 
     return f
@@ -96,25 +96,25 @@ def read_header_old(inn,verbose) :
             vvv = struct.unpack('d',bbb)
             iii = int(vvv[0])
             if verbose :
-                print "Header " , count , names[count] , vvv , iii
+                print ("Header " , count , names[count] , vvv , iii)
             bbb = f.read(8)
             if count  == 7 and iii != numop :
-                print "Mismatch of number of operators"
+                print ("Mismatch of number of operators")
                 raise SomeError("An error occurred")
 
             if count  == 8 and iii != nblock  :
-                print "Mismatch of number of blocks"
+                print ("Mismatch of number of blocks")
                 raise SomeError("An error occurred")
 
             count = count + 1 
 
 
     except IOError as e:
-        print "I/O error({0}): {1}".format(e.errno, e.strerror)
+        print ("I/O error({0}): {1}".format(e.errno, e.strerror))
     except ValueError:
-        print "Could not convert data to an integer."
+        print ("Could not convert data to an integer.")
     except:
-        print "Unexpected error:", sys.exc_info()[0]
+        print ("Unexpected error:", sys.exc_info()[0])
         raise
 
     return f
@@ -138,16 +138,15 @@ def read_body(f,verbose,jj,glueball_corr) :
                             try:
                                 bbb = f.read(8)
                             except IOError as e:
-                                print "I/O error({0}): {1}".format(e.errno, e.strerror)
+                                print ("I/O error({0}): {1}".format(e.errno, e.strerror))
                             except:
-                                print "Unexpected error:", sys.exc_info()[0]
+                                print ("Unexpected error:", sys.exc_info()[0])
                                 raise
 
                             vvv = struct.unpack('d',bbb)
                             if verbose :
-                                print t, vvv[0]
+                                print (t, vvv[0])
 
-#                            print "DEBUG", t, vvv[0]
             
                             glueball_corr[jj, iblockA,iblockB,t, iopA,iopB, ibin] = vvv[0]
 
@@ -178,9 +177,9 @@ def read_body_inc(f,verbose,jj,glueball_corr) :
                             try:
                                 bbb = f.read(8)
                             except IOError as e:
-                                print "I/O error({0}): {1}".format(e.errno, e.strerror)
+                                print ("I/O error({0}): {1}".format(e.errno, e.strerror))
                             except:
-                                print "Unexpected error:", sys.exc_info()[0]
+                                print ("Unexpected error:", sys.exc_info()[0])
                                 raise
 
                             vvv = struct.unpack('d',bbb)
@@ -218,14 +217,14 @@ def read_body_Ainc(f,verbose,glueball_corr) :
                             try:
                                 bbb = f.read(8)
                             except IOError as e:
-                                print "I/O error({0}): {1}".format(e.errno, e.strerror)
+                                print ("I/O error({0}): {1}".format(e.errno, e.strerror))
                             except:
-                                print "Unexpected error:", sys.exc_info()[0]
+                                print ("Unexpected error:", sys.exc_info()[0])
                                 raise
 
                             vvv = struct.unpack('d',bbb)
                             if verbose :
-                                print t, vvv[0]
+                                print (t, vvv[0])
             
                             glueball_corr[iblockA,iblockB,t, iopA,iopB, ibin] = \
                             glueball_corr[iblockA,iblockB,t, iopA,iopB, ibin] + vvv[0]
@@ -245,8 +244,8 @@ def print_glueball(ii, glueball_corr) :
     Print the glueball correlators to the screen.
     The correlator data structure includes all configurations
     """
-    print "******************************"
-    print "Correlator " , ii
+    print ("******************************")
+    print ("Correlator " , ii )
     for iblock in range(0, numbin):
         for iopA in range(0,numop) :
             for iblockA in range(0, nblock) :
@@ -254,7 +253,7 @@ def print_glueball(ii, glueball_corr) :
                     for iblockB in range(0, nblock) :
                         for t in range(0, Ntmax) :
                             
-                            print glueball_corr[ii,iblockA,iblockB,t, iopA,iopB, iblock]
+                            print (glueball_corr[ii,iblockA,iblockB,t, iopA,iopB, iblock])
 
 
 
@@ -268,8 +267,8 @@ def print_glueball_A(ii, glueball_corr) :
     Print the glueball correlators to the screen.
     The correlator data structure includes only ONE  configuration.
     """
-    print "******************************"
-    print "Correlator " , ii
+    print ("******************************")
+    print ("Correlator " , ii)
     for iblock in range(0, numbin):
         for iopA in range(0,numop) :
             for iblockA in range(0, nblock) :
@@ -277,7 +276,7 @@ def print_glueball_A(ii, glueball_corr) :
                     for iblockB in range(0, nblock) :
                         for t in range(0, Ntmax) :
                             
-                            print glueball_corr[ii,iblockA,iblockB,t, iopA,iopB, iblock]
+                            print (glueball_corr[ii,iblockA,iblockB,t, iopA,iopB, iblock])
 
 
 

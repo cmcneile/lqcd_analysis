@@ -28,7 +28,7 @@ def plotcorr_glueball(tag,iop,ib, noconfig,glueball_corr) :
 
     tmp = zeros( (noconfig) )
 
-    print "DIAGONAL" , tag ,   "op=" , iop , " bin=" , ib
+    print ("DIAGONAL" , tag ,   "op=" , iop , " bin=" , ib)
     ibin = 0 
     for t in range(0, Ntmax) :
         mm = 0.0
@@ -38,8 +38,7 @@ def plotcorr_glueball(tag,iop,ib, noconfig,glueball_corr) :
         mm = mm / noconfig
         jerr = jackknife(tmp,noconfig)
 
-##        print ib, iop, t, mm, jerr
-        print t, mm, jerr
+        print (t, mm, jerr)
 
 
 
